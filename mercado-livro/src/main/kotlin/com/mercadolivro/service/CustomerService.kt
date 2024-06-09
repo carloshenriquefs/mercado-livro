@@ -11,7 +11,7 @@ class CustomerService(
         val bookService: BookService
 ) {
 
-    fun getAll(name: String?): List<CustomerModel> {
+    fun findAll(name: String?): List<CustomerModel> {
         name?.let {
             return customerRepository.findByNameContaining(name)
         }

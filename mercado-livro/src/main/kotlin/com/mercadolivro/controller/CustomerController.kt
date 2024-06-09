@@ -16,8 +16,8 @@ class CustomerController(
 ) {
 
     @GetMapping
-    fun getAll(@RequestParam name: String?): List<CustomerResponse> {
-        return customerSevice.getAll(name).map { it.toResponse() }
+    fun findAll(@RequestParam name: String?): List<CustomerResponse> {
+        return customerSevice.findAll(name).map { it.toResponse() }
     }
 
     @PostMapping
