@@ -1,9 +1,11 @@
 package com.mercadolivro.service
 
 import com.mercadolivro.enum.BookStatus
+import com.mercadolivro.extension.NotFoundException
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.BookRepository
+import org.hibernate.annotations.NotFound
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -27,7 +29,7 @@ class BookService(
     }
 
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow()
+        return bookRepository.findById(id).orElseThrow { NotFoundException("Book [${id}] not exists", "ML-0001") }
     }
 
     fun delete(id: Int) {
@@ -45,7 +47,7 @@ class BookService(
     fun deleteByCustomer(customer: CustomerModel) {
         val books = bookRepository.findByCustomer(customer)
 
-        for(book in books) {
+        for (book in books) {
             book.status = BookStatus.DELETADO
         }
         bookRepository.saveAll(books)
