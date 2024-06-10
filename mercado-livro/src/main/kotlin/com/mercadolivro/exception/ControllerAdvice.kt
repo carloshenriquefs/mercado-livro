@@ -1,6 +1,7 @@
 package com.mercadolivro.exception
 
 import com.mercadolivro.controller.response.ErrorResponse
+import com.mercadolivro.extension.BadRequestException
 import com.mercadolivro.extension.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,7 +13,7 @@ import org.springframework.web.context.request.WebRequest
 class ControllerAdvice {
 
     @ExceptionHandler(NotFoundException::class)
-    fun handleException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
+    fun handleNotFoundException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val erro = ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.message,
@@ -21,5 +22,17 @@ class ControllerAdvice {
         )
 
         return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(BadRequestException::class)
+    fun handleBadRequestException(ex: BadRequestException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.message,
+                ex.errorCode,
+                null
+        )
+
+        return ResponseEntity(erro, HttpStatus.BAD_REQUEST)
     }
 }
