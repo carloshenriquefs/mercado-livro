@@ -1,11 +1,11 @@
 package com.mercadolivro.service
 
 import com.mercadolivro.enum.BookStatus
+import com.mercadolivro.enum.Errors
 import com.mercadolivro.extension.NotFoundException
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.BookRepository
-import org.hibernate.annotations.NotFound
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -29,7 +29,7 @@ class BookService(
     }
 
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow { NotFoundException("Book [${id}] not exists", "ML-0001") }
+        return bookRepository.findById(id).orElseThrow { NotFoundException(Errors.ML1001.message.format(id), Errors.ML1001.code) }
     }
 
     fun delete(id: Int) {
