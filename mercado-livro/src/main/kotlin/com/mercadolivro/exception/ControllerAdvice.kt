@@ -2,7 +2,7 @@ package com.mercadolivro.exception
 
 import com.mercadolivro.controller.response.ErrorResponse
 import com.mercadolivro.controller.response.FieldErrorResponse
-import com.mercadolivro.enum.Errors
+import com.mercadolivro.enums.Errors
 import com.mercadolivro.extension.BadRequestException
 import com.mercadolivro.extension.NotFoundException
 import org.springframework.http.HttpStatus

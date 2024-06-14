@@ -1,4 +1,4 @@
-package com.mercadolivro.enum
+package com.mercadolivro.enums
 
 enum class Errors(val code: String, val message: String) {
 
