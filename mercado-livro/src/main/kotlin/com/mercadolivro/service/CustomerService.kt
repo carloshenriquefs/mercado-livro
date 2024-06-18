@@ -2,8 +2,8 @@ package com.mercadolivro.service
 
 import com.mercadolivro.enums.CustomerStatus
 import com.mercadolivro.enums.Errors
-import com.mercadolivro.enums.Profile
-import com.mercadolivro.extension.NotFoundException
+import com.mercadolivro.enums.Role
+import com.mercadolivro.exception.NotFoundException
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -25,14 +25,14 @@ class CustomerService(
 
     fun create(customer: CustomerModel) {
         val customerCopy = customer.copy(
-                roles = setOf(Profile.CUSTOMER),
+                roles = setOf(Role.CUSTOMER),
                 password = bCrypt.encode(customer.password)
         )
         customerRepository.save(customerCopy)
     }
 
     fun findById(id: Int): CustomerModel {
-        return customerRepository.findById(id).orElseThrow { NotFoundException(Errors.ML102.message.format(id), Errors.ML102.code) }
+        return customerRepository.findById(id).orElseThrow { NotFoundException(Errors.ML201.message.format(id), Errors.ML201.code) }
     }
 
     fun update(customer: CustomerModel) {
