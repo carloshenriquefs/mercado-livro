@@ -16,7 +16,7 @@ class CustomerService(
         private val bCrypt: BCryptPasswordEncoder
 ) {
 
-    fun findAll(name: String?): List<CustomerModel> {
+    fun getAll(name: String?): List<CustomerModel> {
         name?.let {
             return customerRepository.findByNameContaining(name)
         }
