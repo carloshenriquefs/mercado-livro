@@ -199,6 +199,7 @@ class CustomerServiceTest {
 
         assertTrue(emailAvailable)
         verify(exactly = 1) { customerRepository.existsByEmail(email) }
+
     }
 
     @Test
@@ -212,6 +213,7 @@ class CustomerServiceTest {
 
         assertFalse(emailAvailable)
         verify(exactly = 1) { customerRepository.existsByEmail(email) }
+
     }
 
 
